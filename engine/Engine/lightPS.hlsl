@@ -7,7 +7,7 @@
 // GLOBALS //
 /////////////
 
-Texture2D shaderTexture;
+Texture2D shaderTextures[2];
 SamplerState SampleType;
 
 cbuffer LightBuffer
@@ -29,6 +29,8 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+	float3 tangent : TANGENT;
+	float3 binormal : BINORMAL;
 };
 
 
@@ -51,7 +53,19 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	color = ambientColor;//float4(lightDirection.x, lightDirection.y, lightDirection.z, 1.0f);
 
 	// Sample the pixel color from the texture using the sampler at this texture coordinate location.
-	textureColor = shaderTexture.Sample(SampleType, input.tex);
+	textureColor = shaderTextures[0].Sample(SampleType, input.tex);
+
+	// Sample the pixel in the bump map.
+	bumpMap = shaderTextures[1].Sample(SampleType, input.tex);
+
+	// Expand the range of the normal value from (0, +1) to (-1, +1).
+	bumpMap = (bumpMap * 2.0f) - 1.0f;
+
+	// Calculate the normal from the data in the bump map.
+	bumpNormal = (bumpMap.x * input.tangent) + (bumpMap.y * input.binormal) + (bumpMap.z * input.normal);
+
+	// Normalize the resulting bump normal.
+	bumpNormal = normalize(bumpNormal);
 	
 	// Initialize the specular color.
     specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -60,7 +74,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	lightDir = -lightDirection;
 
     // Calculate the amount of light on this pixel.
-    lightIntensity = saturate(dot(input.normal, lightDir));
+    lightIntensity = saturate(dot(bumpNormal, lightDir));
 
     // Determine the final amount of diffuse color based on the diffuse color combined with the light intensity.
 
@@ -73,7 +87,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
         color = saturate(color);
 
 		// Calculate the reflection vector based on the light intensity, normal vector, and light direction.
-		reflection = normalize(2 * lightIntensity * input.normal - lightDir);
+		reflection = normalize(2 * lightIntensity * bumpNormal - lightDir);
 
 		// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
 		specular = specularColor * pow(saturate(dot(reflection, input.viewDirection)), specularPower);
