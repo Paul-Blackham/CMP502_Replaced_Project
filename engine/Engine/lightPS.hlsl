@@ -41,6 +41,8 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 {
 
 	float4 textureColor;
+	float4 bumpMap;
+	float3 bumpNormal;
 	float3 lightDir;
 	float lightIntensity;
 	float4 color;

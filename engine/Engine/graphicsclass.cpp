@@ -68,7 +68,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), "../Engine/data/Model.obj", L"../Engine/data/Model.dds", L"../Engine/data/Model_normal.dds");
+	result = m_Model->Initialize(m_D3D->GetDevice(), "../Engine/data/Model.obj", L"../Engine/data/Model.dds", L"../Engine/data/bump01.dds");
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -98,7 +98,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	result = m_environmentModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Environment.obj", L"../Engine/data/Environment.dds", L"../Engine/data/Model_normal.dds");
+	result = m_environmentModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Environment.obj", L"../Engine/data/Environment.dds", L"../Engine/data/bump01.dds");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
