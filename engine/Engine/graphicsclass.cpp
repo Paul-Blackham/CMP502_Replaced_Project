@@ -68,7 +68,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), "../Engine/data/Model.obj", L"../Engine/data/Model.dds", L"../Engine/data/bump01.dds");
+	result = m_Model->Initialize(m_D3D->GetDevice(), "../Engine/data/Model.obj", L"../Engine/data/Model.dds", L"../Engine/data/Model_normal.dds"); //Model_normal.dds
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -285,7 +285,7 @@ void GraphicsClass::ProcessCameraMovement(float zoom, float rotateX, float rotat
 	float positionY = currentPosition.y + normalY;
 	float positionZ = currentPosition.z + normalZ;
 
-	/*if (positionX > 20.0f) {
+	if (positionX > 20.0f) {
 		positionX = 20.0f;
 	}
 
@@ -305,13 +305,13 @@ void GraphicsClass::ProcessCameraMovement(float zoom, float rotateX, float rotat
 	}
 	if (positionZ < -20.0f) {
 		positionZ = -20.0f;
-	}*/
+	}
 
 	xRotation += rotateX;
 	yRotation += rotateY;
 	//zRotation += rotateX;
 
-	float xZunit2Dvec = sqrt(currentPosition.x * currentPosition.x + currentPosition.z * currentPosition.z);
+	float xZunit2Dvec = sqrt(positionX * positionX + positionZ * positionZ);
 	int xMult = 1;
 	int yMult = 1;
 	int zMult = 1;
@@ -327,7 +327,7 @@ void GraphicsClass::ProcessCameraMovement(float zoom, float rotateX, float rotat
 		zMult = -1;
 	}
 
-	float yUnit2Dvec = sqrt(xZunit2Dvec * xZunit2Dvec + currentPosition.y * currentPosition.y);
+	float yUnit2Dvec = sqrt(xZunit2Dvec * xZunit2Dvec + positionY * positionY);
 
 	m_Camera->SetPosition( sin(xRotation) * xZunit2Dvec, sin(yRotation) * yUnit2Dvec, cos(xRotation) * xZunit2Dvec * -1.0f);
 }
