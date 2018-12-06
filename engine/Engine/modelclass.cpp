@@ -477,7 +477,7 @@ bool ModelClass::ReadObjVertData(char* filename) {
 					>> m_face[faceIndex].b >> input2 >> m_face[faceIndex].bt >> input2 >> m_face[faceIndex].bn
 					>> m_face[faceIndex].a >> input2 >> m_face[faceIndex].at >> input2 >> m_face[faceIndex].an;
 
-				// May need to reverse order here...
+				// Note ^^ above order is reversed (look at 'a', 'b', and 'c') due to left handed system translation
 				faceIndex++;
 			}
 		}

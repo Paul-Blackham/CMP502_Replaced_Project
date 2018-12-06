@@ -49,7 +49,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	float3 reflection;
     float4 specular;
 
-	input.normal = normalize(input.normal);
+	//input.normal = normalize(input.normal);
 
 	// Set the default output color to the ambient light value for all pixels.
 	color = ambientColor;//float4(lightDirection.x, lightDirection.y, lightDirection.z, 1.0f);
