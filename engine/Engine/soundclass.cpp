@@ -35,7 +35,7 @@ bool SoundClass::Initialize(HWND hwnd)
 	}
 
 	// Load a wave audio file onto a secondary buffer.
-	result = LoadWaveFile("../Engine/data/sound01.wav", &m_secondaryBuffer1);
+	result = LoadWaveFile("../Engine/data/sound02.wav", &m_secondaryBuffer1); // Audio thanks to metamorphmuses - freesound.org
 	if(!result)
 	{
 		return false;
@@ -197,23 +197,25 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 		return false;
 	}
 
-	// Check that the wave file was recorded in stereo format.
-	if(waveFileHeader.numChannels != 2)
-	{
-		return false;
-	}
+	// Removed following lines of code due to not needing stereo format audio, etc. - I just need to get audio that is available to me to work?
 
-	// Check that the wave file was recorded at a sample rate of 44.1 KHz.
-	if(waveFileHeader.sampleRate != 44100)
-	{
-		return false;
-	}
+	//// Check that the wave file was recorded in stereo format.
+	//if(waveFileHeader.numChannels != 2)
+	//{
+	//	return false;
+	//}
 
-	// Ensure that the wave file was recorded in 16 bit format.
-	if(waveFileHeader.bitsPerSample != 16)
-	{
-		return false;
-	}
+	//// Check that the wave file was recorded at a sample rate of 44.1 KHz.
+	//if(waveFileHeader.sampleRate != 44100)
+	//{
+	//	return false;
+	//}
+
+	//// Ensure that the wave file was recorded in 16 bit format.
+	//if(waveFileHeader.bitsPerSample != 16)
+	//{
+	//	return false;
+	//}
 
 	// Check for the data chunk header.
 	if((waveFileHeader.dataChunkId[0] != 'd') || (waveFileHeader.dataChunkId[1] != 'a') ||
