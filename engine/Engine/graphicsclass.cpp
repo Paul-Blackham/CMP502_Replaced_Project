@@ -143,11 +143,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the light object.
-	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
-	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light->SetAmbientColor(0.2f, 0.2f, 0.3f, 1.0f);
+	m_Light->SetDiffuseColor(0.9f, 0.9f, 1.0f, 1.0f);
 	m_Light->SetDirection(0.0f, -1.0f, 0.0f);
 	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light->SetSpecularPower(10.0f);
+	m_Light->SetSpecularPower(75.0f);
 
 	// Create the render to texture object.
 	m_RenderTexture = new RenderTextureClass;
@@ -285,26 +285,26 @@ void GraphicsClass::ProcessCameraMovement(float zoom, float rotateX, float rotat
 	float positionY = currentPosition.y + normalY;
 	float positionZ = currentPosition.z + normalZ;
 
-	if (positionX > 20.0f) {
-		positionX = 20.0f;
+	if (positionX > 18.0f) {
+		positionX = 18.0f;
 	}
 
-	if (positionX < -20.0f) {
-		positionX = -20.0f;
+	if (positionX < -18.0f) {
+		positionX = -18.0f;
 	}
 
-	if (positionY > 20.0f) {
-		positionY = 20.0f;
+	if (positionY > 18.0f) {
+		positionY = 18.0f;
 	}
-	if (positionY < -20.0f) {
-		positionY = -20.0f;
+	if (positionY < -18.0f) {
+		positionY = -18.0f;
 	}
 
-	if (positionZ > 20.0f) {
-		positionZ = 20.0f;
+	if (positionZ > 18.0f) {
+		positionZ = 18.0f;
 	}
-	if (positionZ < -20.0f) {
-		positionZ = -20.0f;
+	if (positionZ < -18.0f) {
+		positionZ = -18.0f;
 	}
 
 	xRotation += rotateX;
