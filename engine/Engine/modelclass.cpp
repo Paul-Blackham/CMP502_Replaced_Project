@@ -453,6 +453,7 @@ bool ModelClass::ReadObjVertData(char* filename) {
 
 				// Invert the V texture coordinates to left hand system.
 				m_model[texcoordIndex].tv = 1.0f - m_model[texcoordIndex].tv;
+				//m_model[texcoordIndex].tu = 1.0f - m_model[texcoordIndex].tu;
 				texcoordIndex++;
 			}
 

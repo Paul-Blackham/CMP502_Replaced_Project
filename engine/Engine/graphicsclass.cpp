@@ -83,7 +83,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	result = m_floorModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Floor.obj", L"../Engine/data/seafloor.dds", L"../Engine/data/bump01.dds");
+	result = m_floorModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Floor.obj", L"../Engine/data/Floor_basecolor.png", L"../Engine/data/Floor_normal.png");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -98,7 +98,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	result = m_environmentModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Environment.obj", L"../Engine/data/Environment.dds", L"../Engine/data/bump01.dds");
+	result = m_environmentModel->Initialize(m_D3D->GetDevice(), "../Engine/data/Environment2.obj", L"../Engine/data/Environment2_basecolor.png", L"../Engine/data/Environment2_normal.png");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
